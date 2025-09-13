@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+#game {
+  .sky {
+    height: 20vh;
+    position: relative;
+    overflow: hidden;
+
+    #boat {
+      width: 5vw;
+      height: 3vh;
+      background: brown;
+      position: absolute;
+      bottom: -1vh;
+      left: 0px;
+      border-bottom-right-radius: 2.5vw;
+      border-bottom-left-radius: 2.5vw;
+      display: inline-block;
+    }
+  }
+  .water {
+    height: 80vh;
+    background-color: #8585e3;
+  }
+}

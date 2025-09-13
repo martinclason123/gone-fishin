@@ -1,0 +1,22 @@
+{
+  "name": "fishin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && npm run sass:build",
+    "dev": "concurrently -k -n TS,SASS -c auto \"tsc --watch\" \"sass --watch src/styles:dist/styles\"",
+    "sass:build": "sass src/styles:dist/styles",
+    "sass:watch": "sass --watch src/styles:dist/styles"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/node": "^24.3.1",
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.10",
+    "typescript": "^5.9.2"
+  }
+}
