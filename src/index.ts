@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (boat && gameContainer) {
     gameDimensions = gameContainer.getBoundingClientRect();
+    console.log("game dimensions", gameDimensions);
     boatDimensions = boat?.getBoundingClientRect();
     maxRight = gameDimensions.width - boatDimensions.width;
     maxLeft = 0;
@@ -18,15 +19,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const move = (element: HTMLElement, direction: "left" | "right") => {
     const left = parseInt(element.style.left || "0px");
-    let moveMentPx = 5;
+    let moveMentPx = 50;
 
     if (direction === "left") {
-      if (left - 5 < maxLeft) {
-        moveMentPx = maxLeft - left;
+      if (left - moveMentPx < maxLeft) {
+        console.log("overflowing!", { maxLeft, moveMentPx });
+        moveMentPx = maxLeft + left;
       }
       element.style.left = `${left - moveMentPx}px`;
     } else if (direction === "right") {
-      if (left + 5 > maxRight) {
+      if (left + moveMentPx > maxRight) {
         moveMentPx = maxRight - left;
       }
       element.style.left = `${left + moveMentPx}px`;

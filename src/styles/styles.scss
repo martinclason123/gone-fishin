@@ -19,6 +19,7 @@
       border-bottom-right-radius: 2.5vw;
       border-bottom-left-radius: 2.5vw;
       display: inline-block;
+      transition: left 500ms cubic-bezier(0, 0, 0.2, 1);
     }
   }
   .water {
