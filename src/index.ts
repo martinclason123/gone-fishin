@@ -1,20 +1,39 @@
-console.log("Gone Fishin'");
+type FishPosition = {
+  verticalStart: number;
+  horizontalStart: "right" | "left";
+};
+class Fish {
+  element: HTMLElement;
+
+  constructor(start: FishPosition) {
+    this.element = document.createElement("div");
+    this.element.classList.add("fish");
+    this.element.style.bottom = `${start.verticalStart}vh`;
+    if (start.horizontalStart === "left") {
+      this.element.classList.add("leftStart");
+    } else {
+      this.element.classList.add("rightStart");
+    }
+  }
+  move() {}
+}
+
+const createFish = (water: HTMLElement, position: FishPosition) => {
+  const fish = new Fish(position);
+  water.append(fish.element);
+};
 
 document.addEventListener("DOMContentLoaded", () => {
-  const gameContainer = document.getElementById("game");
-
   const boat = document.getElementById("boat");
-  let boatDimensions;
-  let gameDimensions;
-  let maxRight: number;
-  let maxLeft: number;
+  const maxLeft = 0;
+  const water = document.getElementById("water");
 
-  if (boat && gameContainer) {
-    gameDimensions = gameContainer.getBoundingClientRect();
-    console.log("game dimensions", gameDimensions);
+  let boatDimensions;
+  let maxRight: number;
+
+  if (boat) {
     boatDimensions = boat?.getBoundingClientRect();
-    maxRight = gameDimensions.width - boatDimensions.width;
-    maxLeft = 0;
+    maxRight = window.innerWidth - boatDimensions.width;
   }
 
   const move = (element: HTMLElement, direction: "left" | "right") => {
@@ -45,4 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  //   createFish(water!, { verticalStart: 10, horizontalStart: "left" });
 });

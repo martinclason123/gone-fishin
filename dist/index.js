@@ -1,18 +1,32 @@
 "use strict";
-console.log("Gone Fishin'");
+class Fish {
+    element;
+    constructor(start) {
+        this.element = document.createElement("div");
+        this.element.classList.add("fish");
+        this.element.style.bottom = `${start.verticalStart}vh`;
+        if (start.horizontalStart === "left") {
+            this.element.classList.add("leftStart");
+        }
+        else {
+            this.element.classList.add("rightStart");
+        }
+    }
+    move() { }
+}
+const createFish = (water, position) => {
+    const fish = new Fish(position);
+    water.append(fish.element);
+};
 document.addEventListener("DOMContentLoaded", () => {
-    const gameContainer = document.getElementById("game");
     const boat = document.getElementById("boat");
+    const maxLeft = 0;
+    const water = document.getElementById("water");
     let boatDimensions;
-    let gameDimensions;
     let maxRight;
-    let maxLeft;
-    if (boat && gameContainer) {
-        gameDimensions = gameContainer.getBoundingClientRect();
-        console.log("game dimensions", gameDimensions);
+    if (boat) {
         boatDimensions = boat?.getBoundingClientRect();
-        maxRight = gameDimensions.width - boatDimensions.width;
-        maxLeft = 0;
+        maxRight = window.innerWidth - boatDimensions.width;
     }
     const move = (element, direction) => {
         const left = parseInt(element.style.left || "0px");
@@ -41,4 +55,5 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    //   createFish(water!, { verticalStart: 10, horizontalStart: "left" });
 });
