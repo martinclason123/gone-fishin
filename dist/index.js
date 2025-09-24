@@ -1,10 +1,15 @@
-"use strict";
+import bass from "../src/assets/speciesSVGs.js";
+import { getAnimation } from "./utilities.js";
 class Fish {
-    element;
     constructor(start) {
-        this.element = document.createElement("div");
+        const { keyFrame, bottom, animation } = getAnimation();
+        this.element = document.createElement("figure");
         this.element.classList.add("fish");
-        this.element.style.bottom = `${start.verticalStart}vh`;
+        this.element.style.bottom = bottom;
+        this.element.style.animation = animation;
+        const style = document.createElement("style");
+        style.innerHTML = keyFrame;
+        document.head.appendChild(style);
         if (start.horizontalStart === "left") {
             this.element.classList.add("leftStart");
         }
@@ -14,8 +19,23 @@ class Fish {
     }
     move() { }
 }
-const createFish = (water, position) => {
-    const fish = new Fish(position);
+class Bass extends Fish {
+    constructor(start) {
+        super(start);
+        this.element.innerHTML = bass;
+        this.element.classList.add("bass");
+    }
+}
+const createFish = (species = "sunfish", water, position) => {
+    let fish;
+    switch (species) {
+        case "bass":
+            fish = new Bass(position);
+        case "perch":
+            fish = new Bass(position);
+        case "sunfish":
+            fish = new Bass(position);
+    }
     water.append(fish.element);
 };
 document.addEventListener("DOMContentLoaded", () => {
@@ -55,5 +75,5 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-    //   createFish(water!, { verticalStart: 10, horizontalStart: "left" });
+    createFish("bass", water, { verticalStart: 10, horizontalStart: "left" });
 });
